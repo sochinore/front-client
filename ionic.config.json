@@ -1,0 +1,7 @@
+{
+  "name": "hgp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
