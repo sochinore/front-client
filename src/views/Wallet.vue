@@ -341,7 +341,7 @@ export default {
         }
       }
       console.log("selectUtxos:", selectUtxos)
-      
+
       var psbtHex = "";
       this.loadingMsg = "build psbt...."
       this.transferData.amount = Number(this.transferData.amount)
@@ -376,6 +376,7 @@ export default {
    chequeClick: async function (symbol, amount) {
       this.modalTitle = "cheque"
       this.transferData.amount = 0
+      this.transferData.op = "cheque"
       this.transferData.reciveAddr = this.currentAddr
       this.transferData.symbol = symbol
       await connectUnisatWallet(this.syncWalletInfo)
