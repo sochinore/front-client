@@ -213,7 +213,7 @@ import { closeCircleSharp } from "ionicons/icons";
 import axios from "axios";
 import { mintPsbt } from "../script/psbt.js";
 import { getFeeRates, getTxHex, getUnspentUtxo } from "../script/mempool.js";
-import { connectUnisatWallet } from '@/script/unisat.js';
+import { connectUnisatWallet } from "@/script/unisat.js";
 // import {Buffer} from "buffer";
 export default {
   components: {
@@ -269,13 +269,13 @@ export default {
         // 请求失败处理
         console.log(error);
       });
-    connectUnisatWallet(this.syncWalletInfo)
+    connectUnisatWallet(this.syncWalletInfo);
   },
   methods: {
-   syncWalletInfo: function(){
-      var addr = localStorage.getItem("currentAddr")
-      if(localStorage.getItem("currentAddr") == null){
-        return "connect"
+    syncWalletInfo: function () {
+      var addr = localStorage.getItem("currentAddr");
+      if (localStorage.getItem("currentAddr") == null) {
+        return "connect";
       }
       this.currentAddr = addr;
     },
@@ -285,13 +285,13 @@ export default {
       this.mintData.symbol = symbol;
       this.mintData.amount = amount;
       this.mintData.reciveAddr = this.currentAddr;
-      await connectUnisatWallet(this.syncWalletInfo)
+      await connectUnisatWallet(this.syncWalletInfo);
       toastController.create({
         message: "Hello World!",
         duration: 20000,
         position: "middle",
       });
-      this.feeRates = await getFeeRates()
+      this.feeRates = await getFeeRates();
     },
     closeMint: function () {
       this.isOpen = false;
@@ -322,14 +322,15 @@ export default {
     },
     startMint: async function () {
       var utxos = await getUnspentUtxo(this.currentAddr);
-      console.log(utxos)
-      var fee = this.feeRates[this.feeRate] * this.vByte +
+      console.log(utxos);
+      var fee =
+        this.feeRates[this.feeRate] * this.vByte +
         this.serviceFee +
         this.scriptFee;
       var selectUtxos = [];
       for (let i = 0; i < utxos.length; i++) {
         var item = utxos[i];
-        console.log(item)
+        console.log(item);
         if (item.value > fee) {
           selectUtxos.push({
             value: item.value,
@@ -349,7 +350,7 @@ export default {
         this.mintData.reciveAddr
       );
       if (window.unisat != undefined) {
-        console.log(mintPsbtHex)
+        console.log(mintPsbtHex);
         window.unisat.signPsbt(mintPsbtHex).then((res) => {
           window.unisat.pushPsbt(res);
         });
@@ -382,6 +383,10 @@ ion-modal ion-content ion-card {
 ion-modal ion-content ion-list {
   --background: rgb(77, 1, 1);
   --color: white;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 ion-modal ion-content ion-item {
   --background: rgb(77, 1, 1);
